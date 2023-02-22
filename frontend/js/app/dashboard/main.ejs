@@ -4,6 +4,21 @@
 
 <% if (columns) { %>
 <div class="row">
+    <% if (canShow('webspaces')) { %>
+        <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
+            <div class="card p-3">
+                <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-green mr-3">
+                      <i class="fe fe-zap"></i>
+                    </span>
+                    <div>
+                        <h4 class="m-0"><a href="/nginx/webspaces"><%- getHostStat('webspace') %> <small><%- i18n('webspaces', 'title') %></small></a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
     <% if (canShow('proxy_hosts')) { %>
     <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
         <div class="card p-3">

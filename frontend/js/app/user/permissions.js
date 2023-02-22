@@ -32,6 +32,7 @@ module.exports = Mn.View.extend({
                     access_lists:      'manage',
                     dead_hosts:        'manage',
                     proxy_hosts:       'manage',
+                    webspaces:         'manage',
                     redirection_hosts: 'manage',
                     streams:           'manage',
                     certificates:      'manage'

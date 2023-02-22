@@ -8,6 +8,10 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" data-toggle="dropdown"><i class="fe fe-monitor"></i> <%- i18n('menu', 'hosts') %></a>
                     <div class="dropdown-menu dropdown-menu-arrow">
+                        <% if (canShow('webspaces')) { %>
+                            <a href="/nginx/webspaces" class="dropdown-item "><%- i18n('webspaces', 'title') %></a>
+                        <% } %>
+
                         <% if (canShow('proxy_hosts')) { %>
                         <a href="/nginx/proxy" class="dropdown-item "><%- i18n('proxy-hosts', 'title') %></a>
                         <% } %>

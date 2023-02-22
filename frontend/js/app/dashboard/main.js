@@ -73,7 +73,7 @@ module.exports = Mn.View.extend({
         // calculate the available columns based on permissions for the objects
         // and store as a variable
         //let view = this;
-        let perms = ['proxy_hosts', 'redirection_hosts', 'streams', 'dead_hosts'];
+        let perms = ['webspaces', 'proxy_hosts', 'redirection_hosts', 'streams', 'dead_hosts'];
 
         perms.map(perm => {
             this.columns += Cache.User.isAdmin() || Cache.User.canView(perm) ? 1 : 0;
