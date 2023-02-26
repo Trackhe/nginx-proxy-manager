@@ -1,4 +1,5 @@
 const _                    = require('lodash');
+const webspaceModel       = require('../models/webspace');
 const proxyHostModel       = require('../models/proxy_host');
 const redirectionHostModel = require('../models/redirection_host');
 const deadHostModel        = require('../models/dead_host');
@@ -74,6 +75,9 @@ const internalHost = {
 	 */
 	getHostsWithDomains: function (domain_names) {
 		let promises = [
+			webspaceModel
+				.query()
+				.where('is_deleted', 0),
 			proxyHostModel
 				.query()
 				.where('is_deleted', 0),
@@ -90,6 +94,7 @@ const internalHost = {
 				let response_object = {
 					total_count:       0,
 					dead_hosts:        [],
+					webspaces: 		   [],
 					proxy_hosts:       [],
 					redirection_hosts: []
 				};
@@ -112,6 +117,12 @@ const internalHost = {
 					response_object.total_count += response_object.dead_hosts.length;
 				}
 
+				if (promises_results[3]) {
+					// Dead Hosts
+					response_object.webspaces   = internalHost._getHostsWithDomains(promises_results[3], domain_names);
+					response_object.total_count += response_object.webspaces.length;
+				}
+
 				return response_object;
 			});
 	},
@@ -120,12 +131,16 @@ const internalHost = {
 	 * Internal use only, checks to see if the domain is already taken by any other record
 	 *
 	 * @param   {String}   hostname
-	 * @param   {String}   [ignore_type]   'proxy', 'redirection', 'dead'
+	 * @param   {String}   [ignore_type]   'webspace', 'proxy', 'redirection', 'dead'
 	 * @param   {Integer}  [ignore_id]     Must be supplied if type was also supplied
 	 * @returns {Promise}
 	 */
 	isHostnameTaken: function (hostname, ignore_type, ignore_id) {
 		let promises = [
+			webspaceModel
+				.query()
+				.where('is_deleted', 0)
+				.andWhere('domain_names', 'like', '%' + hostname + '%'),
 			proxyHostModel
 				.query()
 				.where('is_deleted', 0)
@@ -161,6 +176,13 @@ const internalHost = {
 				if (promises_results[2]) {
 					// Dead Hosts
 					if (internalHost._checkHostnameRecordsTaken(hostname, promises_results[2], ignore_type === 'dead' && ignore_id ? ignore_id : 0)) {
+						is_taken = true;
+					}
+				}
+
+				if (promises_results[3]) {
+					// Webspace Hosts
+					if (internalHost._checkHostnameRecordsTaken(hostname, promises_results[3], ignore_type === 'webspace' && ignore_id ? ignore_id : 0)) {
 						is_taken = true;
 					}
 				}

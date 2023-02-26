@@ -32,6 +32,7 @@ router.use('/audit-log', require('./audit-log'));
 router.use('/reports', require('./reports'));
 router.use('/settings', require('./settings'));
 router.use('/nginx/proxy-hosts', require('./nginx/proxy_hosts'));
+router.use('/nginx/webspaces', require('./nginx/webspaces'));
 router.use('/nginx/redirection-hosts', require('./nginx/redirection_hosts'));
 router.use('/nginx/dead-hosts', require('./nginx/dead_hosts'));
 router.use('/nginx/streams', require('./nginx/streams'));

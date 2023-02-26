@@ -65,6 +65,7 @@ const internalUser = {
 						user_id:           user.id,
 						visibility:        is_admin ? 'all' : 'user',
 						proxy_hosts:       'manage',
+						webspaces:		   'manage',
 						redirection_hosts: 'manage',
 						dead_hosts:        'manage',
 						streams:           'manage',

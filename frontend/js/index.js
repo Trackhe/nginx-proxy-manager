@@ -99,7 +99,8 @@ window.tabler = {
         'gray-dark-dark':     '#2a2e33',
         'gray-dark-light':    '#717579',
         'gray-dark-lighter':  '#c2c4c6',
-        'gray-dark-lightest': '#ebebec'
+        'gray-dark-lightest': '#ebebec',
+        'magenta':            '#cf46cd'
     }
 };
 

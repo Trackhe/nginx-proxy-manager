@@ -20,6 +20,9 @@
     "proxy-hosts": {
       "$ref": "endpoints/proxy-hosts.json"
     },
+    "webspaces": {
+      "$ref": "endpoints/webspaces.json"
+    },
     "redirection-hosts": {
       "$ref": "endpoints/redirection-hosts.json"
     },

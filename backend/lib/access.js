@@ -14,6 +14,7 @@ const validator      = require('ajv');
 const error          = require('./error');
 const userModel      = require('../models/user');
 const proxyHostModel = require('../models/proxy_host');
+const webspaceModel  = require('../models/webspace');
 const TokenModel     = require('../models/token');
 const roleSchema     = require('./access/roles.json');
 const permsSchema    = require('./access/permissions.json');
@@ -116,9 +117,37 @@ module.exports = function (token_string) {
 							resolve(token_user_id ? [token_user_id] : []);
 							break;
 
-							// Proxy Hosts
+						// Proxy Hosts
 						case 'proxy_hosts':
 							query = proxyHostModel
+								.query()
+								.select('id')
+								.andWhere('is_deleted', 0);
+
+							if (permissions.visibility === 'user') {
+								query.andWhere('owner_user_id', token_user_id);
+							}
+
+							resolve(query
+								.then((rows) => {
+									let result = [];
+									_.forEach(rows, (rule_row) => {
+										result.push(rule_row.id);
+									});
+
+									// enum should not have less than 1 item
+									if (!result.length) {
+										result.push(0);
+									}
+
+									return result;
+								})
+							);
+							break;
+
+						// Proxy Hosts
+						case 'webspaces':
+							query = webspaceModel
 								.query()
 								.select('id')
 								.andWhere('is_deleted', 0);
@@ -258,6 +287,7 @@ module.exports = function (token_string) {
 										roles:                        user_roles,
 										permission_visibility:        permissions.visibility,
 										permission_proxy_hosts:       permissions.proxy_hosts,
+										permission_webspaces:         permissions.webspaces,
 										permission_redirection_hosts: permissions.redirection_hosts,
 										permission_dead_hosts:        permissions.dead_hosts,
 										permission_streams:           permissions.streams,
@@ -276,9 +306,9 @@ module.exports = function (token_string) {
 
 								permissionSchema.properties[permission] = require('./access/' + permission.replace(/:/gim, '-') + '.json');
 
-								// logger.info('objectSchema', JSON.stringify(objectSchema, null, 2));
-								// logger.info('permissionSchema', JSON.stringify(permissionSchema, null, 2));
-								// logger.info('data_schema', JSON.stringify(data_schema, null, 2));
+								//logger.info('objectSchema', JSON.stringify(objectSchema, null, 2));
+								//logger.info('permissionSchema', JSON.stringify(permissionSchema, null, 2));
+								//logger.info('data_schema', JSON.stringify(data_schema, null, 2));
 
 								let ajv = validator({
 									verbose:      true,

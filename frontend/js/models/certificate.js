@@ -15,6 +15,7 @@ const model = Backbone.Model.extend({
             meta:              {},
             // The following are expansions:
             owner:             null,
+            webspaces:         [],
             proxy_hosts:       [],
             redirection_hosts: [],
             dead_hosts:        []

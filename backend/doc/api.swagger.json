@@ -368,6 +368,7 @@
 												"permissions": {
 													"visibility": "all",
 													"proxy_hosts": "manage",
+													"webspaces": "manage",
 													"redirection_hosts": "manage",
 													"dead_hosts": "manage",
 													"streams": "manage",
@@ -431,6 +432,7 @@
 											],
 											"permissions": {
 												"visibility": "all",
+												"webspaces": "manage",
 												"proxy_hosts": "manage",
 												"redirection_hosts": "manage",
 												"dead_hosts": "manage",
@@ -1193,6 +1195,15 @@
 					"proxy_hosts": {
 						"type": "string",
 						"description": "Proxy Hosts Permissions",
+						"enum": [
+							"hidden",
+							"view",
+							"manage"
+						]
+					},
+					"webspaces": {
+						"type": "string",
+						"description": "Webspace Permissions",
 						"enum": [
 							"hidden",
 							"view",

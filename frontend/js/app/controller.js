@@ -102,6 +102,94 @@ module.exports = {
     },
 
     /**
+     * Nginx Webspaces
+     */
+    showNginxWebspace: function () {
+        if (Cache.User.isAdmin() || Cache.User.canView('webspaces')) {
+            let controller = this;
+
+            require(['./main', './nginx/webspace/main'], (App, View) => {
+                controller.navigate('/nginx/webspace');
+                App.UI.showAppContent(new View());
+            });
+        }
+    },
+
+    /**
+     * Nginx Webspace Host Form
+     *
+     * @param [model]
+     */
+    showNginxWebspaceForm: function (model) {
+        if (Cache.User.isAdmin() || Cache.User.canManage('webspaces')) {
+            require(['./main', './nginx/proxy/form'], function (App, View) {
+                App.UI.showModalDialog(new View({model: model}));
+            });
+        }
+    },
+
+    /**
+     * Proxy Webspace Delete Confirm
+     *
+     * @param model
+     */
+    showNginxWebspaceDeleteConfirm: function (model) {
+        if (Cache.User.isAdmin() || Cache.User.canManage('webspaces')) {
+            require(['./main', './nginx/proxy/delete'], function (App, View) {
+                App.UI.showModalDialog(new View({model: model}));
+            });
+        }
+    },
+
+    /**
+     * Nginx Redirection Hosts
+     */
+    showNginxRedirection: function () {
+        if (Cache.User.isAdmin() || Cache.User.canView('redirection_hosts')) {
+            let controller = this;
+
+            require(['./main', './nginx/redirection/main'], (App, View) => {
+                controller.navigate('/nginx/redirection');
+                App.UI.showAppContent(new View());
+            });
+        }
+    },
+
+    /**
+     * Nginx Redirection Host Form
+     *
+     * @param [model]
+     */
+    showNginxRedirectionForm: function (model) {
+        if (Cache.User.isAdmin() || Cache.User.canManage('redirection_hosts')) {
+            require(['./main', './nginx/redirection/form'], function (App, View) {
+                App.UI.showModalDialog(new View({model: model}));
+            });
+        }
+    },
+
+    /**
+     * Proxy Redirection Delete Confirm
+     *
+     * @param model
+     */
+    showNginxRedirectionDeleteConfirm: function (model) {
+        if (Cache.User.isAdmin() || Cache.User.canManage('redirection_hosts')) {
+            require(['./main', './nginx/redirection/delete'], function (App, View) {
+                App.UI.showModalDialog(new View({model: model}));
+            });
+        }
+    },
+
+
+
+
+
+
+
+
+
+    /**
      * Nginx Proxy Hosts
      */
     showNginxProxy: function () {

@@ -39,6 +39,7 @@ class AccessList extends Model {
 
 	static get relationMappings () {
 		const ProxyHost = require('./proxy_host');
+		const Webspace = require('./webspace');
 
 		return {
 			owner: {
@@ -84,6 +85,18 @@ class AccessList extends Model {
 				},
 				modify: function (qb) {
 					qb.where('proxy_host.is_deleted', 0);
+					qb.omit(['is_deleted', 'meta']);
+				}
+			},
+			webspaces: {
+				relation:   Model.HasManyRelation,
+				modelClass: Webspace,
+				join:       {
+					from: 'access_list.id',
+					to:   'webspace.access_list_id'
+				},
+				modify: function (qb) {
+					qb.where('webspace.is_deleted', 0);
 					qb.omit(['is_deleted', 'meta']);
 				}
 			}

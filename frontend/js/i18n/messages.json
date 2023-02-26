@@ -117,6 +117,24 @@
       "processing-info": "Processing... This might take a few minutes.",
       "passphrase-protection-support-info": "Key files protected with a passphrase are not supported."
     },
+    "webspaces": {
+      "title": "Webspaces",
+      "empty": "There are no Webspaces",
+      "add": "Add Webspace",
+      "form-title": "{id, select, undefined{New} other{Edit}} Proxy Host",
+      "forward-scheme": "Scheme",
+      "forward-host": "Forward Hostname / IP",
+      "forward-port": "Forward Port",
+      "delete": "Delete Proxy Host",
+      "delete-confirm": "Are you sure you want to delete the Proxy host for: <strong>{domains}</strong>?",
+      "help-title": "What is a Proxy Host?",
+      "help-content": "A Proxy Host is the incoming endpoint for a web service that you want to forward.\nIt provides optional SSL termination for your service that might not have SSL support built in.\nProxy Hosts are the most common use for the Nginx Proxy Manager.",
+      "access-list": "Access List",
+      "allow-websocket-upgrade": "Websockets Support",
+      "ignore-invalid-upstream-ssl": "Ignore Invalid SSL",
+      "custom-forward-host-help": "Add a path for sub-folder forwarding.\nExample: 203.0.113.25/path/",
+      "search": "Search Host…"
+    },
     "proxy-hosts": {
       "title": "Proxy Hosts",
       "empty": "There are no Proxy Hosts",

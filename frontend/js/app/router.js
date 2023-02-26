@@ -6,6 +6,7 @@ module.exports = AppRouter.default.extend({
     appRoutes:  {
         users:                'showUsers',
         logout:               'logout',
+        'nginx/webspace':     'showNginxWebspace',
         'nginx/proxy':        'showNginxProxy',
         'nginx/redirection':  'showNginxRedirection',
         'nginx/404':          'showNginxDead',

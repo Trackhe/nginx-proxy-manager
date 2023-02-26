@@ -236,6 +236,10 @@
             "type": "string",
             "pattern": "^(hidden|view|manage)$"
           },
+          "webspaces": {
+            "type": "string",
+            "pattern": "^(hidden|view|manage)$"
+          },
           "redirection_hosts": {
             "type": "string",
             "pattern": "^(hidden|view|manage)$"

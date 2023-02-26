@@ -48,6 +48,7 @@ exports.up = function (knex/*, Promise*/) {
 				table.dateTime('modified_on').notNull();
 				table.integer('user_id').notNull().unsigned();
 				table.string('visibility').notNull();
+				table.string('webspaces').notNull();
 				table.string('proxy_hosts').notNull();
 				table.string('redirection_hosts').notNull();
 				table.string('dead_hosts').notNull();
@@ -55,6 +56,26 @@ exports.up = function (knex/*, Promise*/) {
 				table.string('access_lists').notNull();
 				table.string('certificates').notNull();
 				table.unique('user_id');
+			});
+		})
+		.then(() => {
+			logger.info('[' + migrate_name + '] user_permission Table created');
+
+			return knex.schema.createTable('webspaces', (table) => {
+				table.increments().primary();
+				table.dateTime('created_on').notNull();
+				table.dateTime('modified_on').notNull();
+				table.integer('owner_user_id').notNull().unsigned();
+				table.integer('is_deleted').notNull().unsigned().defaultTo(0);
+				table.json('domain_names').notNull();
+				table.integer('host_port').notNull().unsigned();
+				table.integer('access_list_id').notNull().unsigned().defaultTo(0);
+				table.integer('certificate_id').notNull().unsigned().defaultTo(0);
+				table.integer('ssl_forced').notNull().unsigned().defaultTo(0);
+				table.integer('caching_enabled').notNull().unsigned().defaultTo(0);
+				table.integer('block_exploits').notNull().unsigned().defaultTo(0);
+				table.text('advanced_config').notNull().defaultTo('');
+				table.json('meta').notNull();
 			});
 		})
 		.then(() => {

@@ -384,6 +384,67 @@ module.exports = {
             }
         },
 
+        Webspaces: {
+            /**
+             * @param   {Array}    [expand]
+             * @param   {String}   [query]
+             * @returns {Promise}
+             */
+            getAll: function (expand, query) {
+                return getAllObjects('nginx/webspaces', expand, query);
+            },
+
+            /**
+             * @param {Object}  data
+             */
+            create: function (data) {
+                return fetch('post', 'nginx/webspaces', data);
+            },
+
+            /**
+             * @param   {Object}   data
+             * @param   {Number}  data.id
+             * @returns {Promise}
+             */
+            update: function (data) {
+                let id = data.id;
+                delete data.id;
+                return fetch('put', 'nginx/webspaces/' + id, data);
+            },
+
+            /**
+             * @param   {Number}  id
+             * @returns {Promise}
+             */
+            delete: function (id) {
+                return fetch('delete', 'nginx/webspaces/' + id);
+            },
+
+            /**
+             * @param   {Number}  id
+             * @returns {Promise}
+             */
+            get: function (id) {
+                return fetch('get', 'nginx/webspaces/' + id);
+            },
+
+            /**
+             * @param   {Number}  id
+             * @returns {Promise}
+             */
+            enable: function (id) {
+                return fetch('post', 'nginx/webspaces/' + id + '/enable');
+            },
+
+            /**
+             * @param   {Number}  id
+             * @returns {Promise}
+             */
+            disable: function (id) {
+                return fetch('post', 'nginx/webspaces/' + id + '/disable');
+            }
+        },
+
         RedirectionHosts: {
             /**
              * @param   {Array}    [expand]
