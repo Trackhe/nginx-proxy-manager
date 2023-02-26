@@ -1,7 +1,7 @@
 const Mn                     = require('backbone.marionette');
 const App                    = require('../../main');
-const ProxyHostModel         = require('../../../models/proxy-host');
-const ProxyLocationModel     = require('../../../models/proxy-host-location');
+const WebspaceModel          = require('../../../models/webspace');
+const WebspaceLocationModel  = require('../../../models/webspace-host-location');
 const template               = require('./form.ejs');
 const certListItemTemplate   = require('../certificates-list-item.ejs');
 const accessListItemTemplate = require('./access-list-item.ejs');
@@ -18,7 +18,7 @@ module.exports = Mn.View.extend({
     template:  template,
     className: 'modal-dialog',
 
-    locationsCollection: new ProxyLocationModel.Collection(),
+    locationsCollection: new WebspaceLocationModel.Collection(),
 
     ui: {
         form:                     'form',
@@ -42,7 +42,7 @@ module.exports = Mn.View.extend({
         credentials_file_content: '.credentials-file-content',
         dns_provider_credentials: 'textarea[name="meta[dns_provider_credentials]"]',
         propagation_seconds:      'input[name="meta[propagation_seconds]"]',
-        forward_scheme:           'select[name="host_scheme"]',
+        host_scheme:              'select[name="host_scheme"]',
         letsencrypt:              '.letsencrypt'
     },
 
@@ -132,7 +132,7 @@ module.exports = Mn.View.extend({
         'click @ui.add_location_btn': function (e) {
             e.preventDefault();
             
-            const model = new ProxyLocationModel.Model();
+            const model = new WebspaceLocationModel.Model();
             this.locationsCollection.add(model);
         },
 
@@ -202,13 +202,13 @@ module.exports = Mn.View.extend({
                 data.certificate_id = parseInt(data.certificate_id, 10);
             }
 
-            let method = App.Api.Nginx.ProxyHosts.create;
+            let method = App.Api.Nginx.Webspaces.create;
             let is_new = true;
 
             if (this.model.get('id')) {
                 // edit
                 is_new  = false;
-                method  = App.Api.Nginx.ProxyHosts.update;
+                method  = App.Api.Nginx.Webspaces.update;
                 data.id = this.model.get('id');
             }
 
@@ -221,7 +221,7 @@ module.exports = Mn.View.extend({
 
                     App.UI.closeModal(function () {
                         if (is_new) {
-                            App.Controller.showNginxProxy();
+                            App.Controller.showNginxWebspace();
                         }
                     });
                 })
@@ -347,10 +347,10 @@ module.exports = Mn.View.extend({
 
     initialize: function (options) {
         if (typeof options.model === 'undefined' || !options.model) {
-            this.model = new ProxyHostModel.Model();
+            this.model = new WebspaceModel.Model();
         }
 
-        this.locationsCollection = new ProxyLocationModel.Collection();
+        this.locationsCollection = new WebspaceLocationModel.Collection();
 
         // Custom locations
         this.showChildView('locations_regions', new CustomLocation.LocationCollectionView({
@@ -360,7 +360,7 @@ module.exports = Mn.View.extend({
         // Check wether there are any location defined
         if (options.model && Array.isArray(options.model.attributes.locations)) {
             options.model.attributes.locations.forEach((location) => {
-                let m = new ProxyLocationModel.Model(location);
+                let m = new WebspaceLocationModel.Model(location);
                 this.locationsCollection.add(m);
             });
         }

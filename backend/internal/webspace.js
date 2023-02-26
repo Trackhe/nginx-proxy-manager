@@ -139,7 +139,7 @@ const internalWebspace = {
 			.then((row) => {
 				if (row.id !== data.id) {
 					// Sanity check that something crazy hasn't happened
-					throw new error.InternalValidationError('Proxy Host could not be updated, IDs do not match: ' + row.id + ' !== ' + data.id);
+					throw new error.InternalValidationError('Webspace could not be updated, IDs do not match: ' + row.id + ' !== ' + data.id);
 				}
 
 				if (create_certificate) {
