@@ -1,4 +1,5 @@
 const internalProxyHost       = require('./proxy-host');
+const internalWebspace		  = require('./webspace');
 const internalRedirectionHost = require('./redirection-host');
 const internalDeadHost        = require('./dead-host');
 const internalStream          = require('./stream');
@@ -15,6 +16,7 @@ const internalReport = {
 				let user_id = access.token.getUserId(1);
 
 				let promises = [
+					internalWebspace.getCount(user_id, access_data.visibility),
 					internalProxyHost.getCount(user_id, access_data.visibility),
 					internalRedirectionHost.getCount(user_id, access_data.visibility),
 					internalStream.getCount(user_id, access_data.visibility),
@@ -25,6 +27,7 @@ const internalReport = {
 			})
 			.then((counts) => {
 				return {
+					webspace:    counts.shift(),
 					proxy:       counts.shift(),
 					redirection: counts.shift(),
 					stream:      counts.shift(),

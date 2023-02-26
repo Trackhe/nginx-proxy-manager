@@ -46,7 +46,7 @@ module.exports = Mn.View.extend({
             title:      App.i18n('webspaces', 'empty'),
             subtitle:   App.i18n('all-hosts', 'empty-subtitle', {manage: manage}),
             link:       manage ? App.i18n('webspaces', 'add') : null,
-            btn_color:  'success',
+            btn_color_hex:  '#cf46cd',
             permission: 'webspaces',
             action:     function () {
                 App.Controller.showNginxWebspaceForm();

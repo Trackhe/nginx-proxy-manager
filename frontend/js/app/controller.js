@@ -122,7 +122,7 @@ module.exports = {
      */
     showNginxWebspaceForm: function (model) {
         if (Cache.User.isAdmin() || Cache.User.canManage('webspaces')) {
-            require(['./main', './nginx/proxy/form'], function (App, View) {
+            require(['./main', './nginx/webspace/form'], function (App, View) {
                 App.UI.showModalDialog(new View({model: model}));
             });
         }
@@ -135,7 +135,7 @@ module.exports = {
      */
     showNginxWebspaceDeleteConfirm: function (model) {
         if (Cache.User.isAdmin() || Cache.User.canManage('webspaces')) {
-            require(['./main', './nginx/proxy/delete'], function (App, View) {
+            require(['./main', './nginx/webspace/delete'], function (App, View) {
                 App.UI.showModalDialog(new View({model: model}));
             });
         }

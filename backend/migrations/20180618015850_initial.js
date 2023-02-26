@@ -61,7 +61,7 @@ exports.up = function (knex/*, Promise*/) {
 		.then(() => {
 			logger.info('[' + migrate_name + '] user_permission Table created');
 
-			return knex.schema.createTable('webspaces', (table) => {
+			return knex.schema.createTable('webspace', (table) => {
 				table.increments().primary();
 				table.dateTime('created_on').notNull();
 				table.dateTime('modified_on').notNull();
@@ -79,7 +79,7 @@ exports.up = function (knex/*, Promise*/) {
 			});
 		})
 		.then(() => {
-			logger.info('[' + migrate_name + '] user_permission Table created');
+			logger.info('[' + migrate_name + '] webspace Table created');
 
 			return knex.schema.createTable('proxy_host', (table) => {
 				table.increments().primary();

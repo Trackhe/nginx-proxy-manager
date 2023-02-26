@@ -5,11 +5,11 @@
 <% if (columns) { %>
 <div class="row">
     <% if (canShow('webspaces')) { %>
-        <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
+        <div class="col">
             <div class="card p-3">
                 <div class="d-flex align-items-center">
-                    <span class="stamp stamp-md bg-green mr-3">
-                      <i class="fe fe-zap"></i>
+                    <span class="stamp stamp-md mr-3" style="background-color: #cf46cd">
+                      <i class="fe fe-folder"></i>
                     </span>
                     <div>
                         <h4 class="m-0"><a href="/nginx/webspace"><%- getHostStat('webspace') %> <small><%- i18n('webspaces', 'title') %></small></a></h4>
@@ -20,7 +20,7 @@
     <% } %>
 
     <% if (canShow('proxy_hosts')) { %>
-    <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
+    <div class="col">
         <div class="card p-3">
             <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-green mr-3">
@@ -35,7 +35,7 @@
     <% } %>
 
     <% if (canShow('redirection_hosts')) { %>
-    <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
+    <div class="col">
         <div class="card p-3">
             <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-yellow mr-3">
@@ -50,7 +50,7 @@
     <% } %>
 
     <% if (canShow('streams')) { %>
-    <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
+    <div class="col">
         <div class="card p-3">
             <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-blue mr-3">
@@ -65,7 +65,7 @@
     <% } %>
 
     <% if (canShow('dead_hosts')) { %>
-    <div class="col-sm-<%- 24 / columns %> col-lg-<%- 12 / columns %>">
+    <div class="col">
         <div class="card p-3">
             <div class="d-flex align-items-center">
                     <span class="stamp stamp-md bg-red mr-3">
